@@ -1,0 +1,23 @@
+{
+  "task_id": "002",
+  "title": "个人主页建站",
+  "status": "done",
+  "completed_at": "2026-10-19T23:05:43+08:00",
+  "evidence": {
+    "folder": "/Users/daiba/homepage-2026-10-19/",
+    "links": [
+      "https://github.com/selectcpt-beep/md-reader"
+    ],
+    "screenshots": [
+      "/Users/daiba/homepage-2026-10-19/evidence/mobile-01-hero.png",
+      "/Users/daiba/homepage-2026-10-19/evidence/mobile-02-work.png",
+      "/Users/daiba/homepage-2026-10-19/evidence/mobile-03-contact.png",
+      "/Users/daiba/homepage-2026-10-19/evidence/desktop-01-hero.png",
+      "/Users/daiba/homepage-2026-10-19/evidence/desktop-02-work.png",
+      "/Users/daiba/homepage-2026-10-19/evidence/desktop-03-coop.png"
+    ],
+    "logs": []
+  },
+  "blockers": [],
+  "notes": "静态站完成，未部署、未建仓。占位符 [品牌名] 5 处、[联系方式] 2 处保留待填；[品牌名]、[联系方式] 实际值与下单入口形态仍待 batian 拍板。"
+}

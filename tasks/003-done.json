@@ -1,0 +1,17 @@
+{
+  "task_id": "003",
+  "title": "唤醒器 — 建 signals 仓库",
+  "status": "done",
+  "completed_at": "2026-10-19T23:47:04+08:00",
+  "evidence": {
+    "folder": "/Users/daiba/hermes-signals/",
+    "links": [
+      "https://github.com/selectcpt-beep/hermes-signals",
+      "https://github.com/selectcpt-beep/hermes-signals/blob/main/README.md"
+    ],
+    "screenshots": [],
+    "logs": []
+  },
+  "blockers": [],
+  "notes": "公开仓库已建并推送（commit da05cc4，分支 main，无 tag）。协议含文件位置/命名/字段表/硬性规则。Muse 侧 hook 的轮询方式（webhook / cron / git pull）尚未确定，需 batian 给方向。"
+}
