@@ -1,0 +1,18 @@
+{
+  "task_id": "example",
+  "title": "示例信号 —— 格式演示，非真实任务",
+  "status": "done",
+  "completed_at": "2026-10-19T23:05:08+08:00",
+  "evidence": {
+    "folder": "/Users/daiba/example-output/",
+    "links": [
+      "https://github.com/selectcpt-beep/md-reader"
+    ],
+    "screenshots": [
+      "/Users/daiba/example-output/evidence/screenshot-01.png"
+    ],
+    "logs": []
+  },
+  "blockers": [],
+  "notes": "这是格式示例文件。真实任务会写自己的 <任务编号>-done.json，不要修改本文件。"
+}
