@@ -1,0 +1,20 @@
+{
+  "task_id": "006",
+  "title": "006自检：取活链验证",
+  "status": "done",
+  "completed_at": "2026-10-20T17:01:30+08:00",
+  "issue": 3,
+  "evidence": {
+    "folder": "",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/3",
+      "https://github.com/selectcpt-beep/task-board/issues/3#issuecomment-6287348687"
+    ],
+    "screenshots": [],
+    "logs": [
+      "/Users/daiba/.hermes/board-poll.log"
+    ]
+  },
+  "blockers": [],
+  "notes": "取活链自检通过，全程无人提醒、无 TG 触发。时间线(UTC)：建卡 08:52:55(状态:待取) → 建卡前最后一轮轮询 08:52:46 空转(open 0 张) → 下一轮 08:58:59 启动 → 08:59:01 脚本 board_poll.py 发 claim(id=2026-10-20T08:59:01Z) → 08:59:03 claim 评论落地 → 08:59:09 标签 待取→进行中 完成。建卡到认领 6m08s，轮询周期 5m，落在建卡后第一个轮询周期内(ticker 派发延迟约 56s)。认领顺序符合协议「先评论后翻标签」(间隔 6s)。本地记账 ~/.hermes/board-state.json 记录 cards.3.claimed=true / claims.3=HERMES，防重复取已生效。agent 侧：卡内已填证据段、发「取活链已通」评论、标签翻到 状态:待验收。本卡无文件产出，folder 为空。"
+}
