@@ -1,0 +1,16 @@
+{
+  "task_id": "004",
+  "title": "测 OpenCode 原生 Zen 免费模型",
+  "status": "done",
+  "completed_at": "2026-10-20T15:03:33+08:00",
+  "evidence": {
+    "folder": "",
+    "links": [],
+    "screenshots": [],
+    "logs": [
+      "/Users/daiba/.hermes/cache/scratch/004-opencode-zen-free-test.log"
+    ]
+  },
+  "blockers": [],
+  "notes": "opencode v2.0.32（绝对路径 ~/.opencode/bin/opencode，不在 PATH）。Zen 免费模型 9 个（opencode/ 前缀），原生 opencode run 实测：8 个可用 exit 0，beam-free 报 'This model is not available in your country' exit 1。可用：deepseek-v4.1-flash-free / glm-5.3-flash-free / longcat-2.5-preview-free / mimo-v2.6-flash-free / minimax-m3.1-flash-free / nemotron-3-ultra-free / nemotron-3.5-lightning-free / nemotron-3.5-super-vl-free。全程未改任何配置（opencode.json mtime 14:20 早于测试 15:02）。"
+}
