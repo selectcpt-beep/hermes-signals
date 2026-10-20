@@ -1,0 +1,20 @@
+{
+  "task_id": "005",
+  "title": "建任务看板仓（私有）+ 协议稿落地",
+  "status": "done",
+  "completed_at": "2026-10-20T16:43:47+08:00",
+  "issue": 2,
+  "evidence": {
+    "folder": "/Users/daiba/task-board/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board",
+      "https://github.com/selectcpt-beep/task-board/blob/main/README.md",
+      "https://github.com/selectcpt-beep/task-board/blob/main/.github/ISSUE_TEMPLATE/task-card.md",
+      "https://github.com/selectcpt-beep/task-board/blob/main/templates/task-card-body.md"
+    ],
+    "screenshots": [],
+    "logs": []
+  },
+  "blockers": [],
+  "notes": "私有仓已建（visibility=PRIVATE，Issues 已启用），本地 /Users/daiba/task-board/。12 个自定义标签一次建全（状态 7 + 接单 3 + 项目 2）。README 协议 v1 经 18 项要点逐条核对全部覆盖。commit 78c2525（协议+模板）、65f7a49（修模板 frontmatter 闭合 + 拆出脚本用纯正文）。自检卡 #2 走完整状态流（待取→进行中→待验收→待确认→完成）后关闭，claim 评论与 batian 确认格式均按协议验证通过。发现并修复真 bug：模板 frontmatter 缺闭合 --- 导致 GitHub UI 无法识别为 issue template，另拆出 templates/task-card-body.md 供 CLI --body-file 使用避免 YAML 字段混入卡正文。注：卡 #1 为修复前的作废自检卡，已关闭留痕。本期未建取活机制、未装 caffeinate、未改 hermes-signals 现有内容。"
+}
