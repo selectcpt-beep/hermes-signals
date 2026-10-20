@@ -1,0 +1,21 @@
+{
+  "task_id": "008-r1",
+  "title": "008 返工第 1 轮 — 修分发失败（退出码 2）根因",
+  "status": "done",
+  "completed_at": "2026-10-20T19:12:00+08:00",
+  "issue": 7,
+  "evidence": {
+    "folder": "/Users/daiba/.hermes/scripts/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/7",
+      "https://github.com/selectcpt-beep/task-board/issues/9"
+    ],
+    "screenshots": [],
+    "logs": [
+      "/Users/daiba/.hermes/cache/scratch/008-round1-fix-evidence.log",
+      "/Users/daiba/.hermes/logs/board-dispatch/20261020-190707-issue9.log"
+    ]
+  },
+  "blockers": [],
+  "notes": "根因两层：(1) board_dispatch.py 的 find_workdir 只认「工作目录：<path>」一种措辞，卡#7 正文写的是裸路径「在 /tmp/keeper-check-008.txt 写入」→ 推不出工作目录 → 直接 return 2（未调用 opencode，退出码 2 来自分发器自身的前置检查，不是模型报错）；(2) 即便补上工作目录字段，$HOME 安全闸会拒 /tmp（不在 $HOME 下）→ 同样退出码 2，这是 Muse 补字段也躲不掉的第二层。修复：find_workdir 改三级推导（显式目录措辞 → 显式文件措辞取父目录 → 全文绝对路径取公共父目录），推导规则单测 12/12；新增 safe_workdir 把 cwd 收敛到 $HOME/.hermes/cache/scratch/issue-<N>，安全闸不放宽（不改成允许系统目录），卡内目标文件绝对路径原样带入提示；提示词新增【重要】段明确「卡内指定的绝对路径就是目标产物路径，必须写到那个路径」，并把段落名从「任务」扩为「目标/任务」（卡#7 用 ## 目标）。关键前提已实测：cwd 在 $HOME 下，opencode 仍能写 $HOME 外的绝对路径（opencode run 写 /tmp/008-permtest.txt 实测 exit 0、od 验证内容正确）。端到端复测：卡#9 完全复现卡#7 写法（无工作目录字段 + /tmp 路径），全程无人提醒，看守 11:06:59 自动认领（建卡 11:03:59，间隔 3m00s）→ 11:07:05 分发（cmd: opencode run --auto --model opencode/glm-5.3-flash-free，cwd=~/.hermes/cache/scratch/issue-9）→ 11:09:08 rc=0 → 11:09:14 证据落卡、标签翻 状态:待验收。独立复算：文件 29 字节、od 逐字节匹配、sha256 e55e031217931bf64d29f058a9e8f2b9826ade453a9c032515bfad8fabcfa379 与 opencode 卡上所贴值及独立期望值三方一致、cmp exit 0。向后兼容已验证：卡#8 那种工作目录在 $HOME 下的写法不被改道（safe_workdir 原样返回），不会因本次修复退化。模型仍钉死 opencode/glm-5.3-flash-free，无付费回退。边界：两个看板 cron 仍 enabled=False（暂停），config.yaml 未改（mtime 15:33:41），未用 --global，未动 WL-DC cron，未碰接单:HERMES 流程。卡#9 验证完已关闭留痕，验证产物 /tmp/keeper-fix-verify.txt 已清理。本信号为 008 的返工追加信号（tasks/008-done.json 未改动）。"
+}
