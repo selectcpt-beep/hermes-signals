@@ -1,0 +1,21 @@
+{
+  "task_id": "006-mechanism",
+  "title": "HERMES 取活机制 + 防睡常驻（机制建设本体）",
+  "status": "done",
+  "completed_at": "2026-10-20T17:05:00+08:00",
+  "issue": 3,
+  "evidence": {
+    "folder": "/Users/daiba/.hermes/scripts/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/3",
+      "https://github.com/selectcpt-beep/task-board/blob/main/README.md"
+    ],
+    "screenshots": [],
+    "logs": [
+      "/Users/daiba/.hermes/cache/scratch/006-board-takeover-evidence.log",
+      "/Users/daiba/.hermes/board-poll.log"
+    ]
+  },
+  "blockers": [],
+  "notes": "本文件记录 006 机制建设本体（防睡 + 取活脚本 + cron 接线）；同批的 tasks/006-done.json 由被唤醒的 agent 自行推送，记录的是自检卡 #3 的链路时间线，两者职责不同、互不覆盖。防睡：caffeinate -dimsu 由 macOS LaunchAgent 托管（~/Library/LaunchAgents/ai.hermes.caffeinate.plist，RunAtLoad+KeepAlive），进程 PPID=1、launchctl state=running，电源断言 PreventSystemSleep 由 0 变 1，系统电源设置未改、未用 sudo。取活：Hermes cron 两个作业——job 7f43c3b21a1a「task-board 取活轮询」每 5 分钟、no_agent 纯脚本 ~/.hermes/scripts/board_poll.py（走 repos/selectcpt-beep/task-board/issues 不用 search 接口；~/.hermes/board-state.json 按 number/updated_at/labels_hash/comments 记账去重；严格「先发 claim 评论、再翻状态标签」）；job da76a76e4eda「task-board 执行看板任务」每 2 分钟、由 ~/.hermes/scripts/board_monitor.py 门控，指纹不变则不唤醒 agent（零模型消耗）。自检卡 #3 全程无人提醒：建卡 08:52:55Z → 轮询自动认领 08:59:01Z（间隔 6m06s，落在建卡后第一个轮询周期内）→ agent 被 monitor 唤醒、评论「取活链已通」并翻到「状态:待验收」。去重验证：连跑 3 轮轮询 stdout 全空、卡评论数不变、monitor 指纹稳定。本期未做 OpenCode 分发（接单:OpenCode 的卡不碰），未改 config.yaml，未用 --global。"
+}
