@@ -1,0 +1,21 @@
+{
+  "task_id": "008",
+  "title": "建看守脚本 —— OpenCode 自动链（不经 HERMES 会话）",
+  "status": "done",
+  "completed_at": "2026-10-20T18:48:00+08:00",
+  "issue": null,
+  "evidence": {
+    "folder": "/Users/daiba/.hermes/scripts/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board",
+      "https://github.com/selectcpt-beep/task-board/blob/main/README.md"
+    ],
+    "screenshots": [],
+    "logs": [
+      "/Users/daiba/.hermes/cache/scratch/008-board-keeper-evidence.log",
+      "/Users/daiba/.hermes/logs/board-keeper.log"
+    ]
+  },
+  "blockers": [],
+  "notes": "看守已上线，等待 Muse 开测试卡（issue 字段待填测试卡号）。看守 = 纯脚本 board_keeper.py，launchd 常驻（~/Library/LaunchAgents/ai.hermes.board-keeper.plist，RunAtLoad+KeepAlive，PPID=1），每 120 秒轮询一次，全程零模型零计费、不经任何 agent 会话。模型钉死 opencode/glm-5.3-flash-free（Zen 免费），硬闸门 assert_free_model 双重校验（必须等于钉死值 + 名字含 -free），7 个模型用例单测全部符合预期，无任何付费回退路径。协议：先发 claim 评论（【OpenCode】已取（看守脚本代认领）。<!-- claim:OpenCode id=UTC -->）再翻标签 待取→进行中；证据仍由 OpenCode 自贴（署【OpenCode】，裁定 B 不变），看守不代贴，仅在失败时发【看守】兜底评论注明退出码/超时，然后翻 状态:待验收。硬超时 1200 秒（20 分钟）；同卡失败 2 次熔断打 状态:阻塞 不再重试。防重复双保险：本地 ~/.hermes/board-keeper-state.json 记已分发卡号 + 认领前先读卡上是否已有 claim 评论。负向验证：逻辑级 10 个卡型用例 + 6 个模型用例共 16/16 正确；真实 API 级把 #4 临时改成 open+状态:待取+接单:HERMES，看守拉到该卡但「本轮处理 0 张」，评论数与标签零变化，测后已完全还原（快照 diff 一致）。README 同步新增裁定 C（看守脚本代认领，仅限自动链；接单:HERMES 认领仍归 HERMES），commit 2fc0b6a 已推 main，远程与本地逐字节一致；第七节改为两条执行链对照表，分发实现拆自动链/手动链两表；裁定 A 加「已被裁定 C 部分修订」标注。修复真 bug 两处：gh() 漏 api 前缀导致拉卡全失败；README 中 2 个 U+FFFD 坏字符。边界：两个看板 cron 保持 paused（enabled=False），未改 config.yaml、未用 --global、未动 WL-DC cron、未碰接单:HERMES 现有流程。"
+}
