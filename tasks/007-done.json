@@ -1,0 +1,23 @@
+{
+  "task_id": "007",
+  "title": "OpenCode 分发机制：接单:OpenCode 的卡由 HERMES 判断后 opencode run 分发",
+  "status": "done",
+  "completed_at": "2026-10-20T17:57:00+08:00",
+  "issue": 4,
+  "evidence": {
+    "folder": "/Users/daiba/.hermes/scripts/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/4",
+      "https://github.com/selectcpt-beep/task-board/issues/5",
+      "https://github.com/selectcpt-beep/task-board/commit/e4b8da4e835dd3f2039cb29eb3ab13203da85bb3",
+      "https://github.com/selectcpt-beep/task-board/issues/5#issuecomment-6288284966"
+    ],
+    "screenshots": [],
+    "logs": [
+      "/Users/daiba/.hermes/logs/board-dispatch/20261020-175331-issue5.log",
+      "/Users/daiba/.hermes/board-poll.log"
+    ]
+  },
+  "blockers": [],
+  "notes": "裁定 A/B 写入 README（commit e4b8da4，已 push main）：A=一期认领人始终是 HERMES、OpenCode 不认领不翻标签；B=证据由执行者本人贴并署执行者的名（OpenCode 干的署【OpenCode】）、标签仍由 HERMES 翻、没贴成时 HERMES 代贴并注明。分发链：board_poll.py 认领范围扩到「状态:待取 + (接单:HERMES|接单:OpenCode)」，两种卡仍由 HERMES 发 claim（state 记 target）；新增 board_dispatch.py（取卡正文「任务/步骤/验收标准/停止条件/工作目录」原文拼提示 → opencode run --auto --model opencode/glm-5.3-flash-free → 核验退出码与「分发开始后正文含【OpenCode】」的评论，退出码 0/3/2/124 分别表示成功/证据未落卡/前置不满足/超时）；board_monitor.py 指纹纳入 接单:OpenCode（不加则 OpenCode 卡状态变化不唤醒执行方）；执行方 cron da76a76e4eda 提示词加 OpenCode 分支（job 已更新，jobs.json 实测 PROMPT_LEN 931）。自检卡 #5（接单:OpenCode + 状态:待取，工作目录 /Users/daiba/.hermes/cache/scratch/007-opencode-selftest）全程无人提醒：09:51:46Z 建卡 → 09:53:00Z 轮询脚本自动 claim（建卡后第一轮 5m 轮询内，1m14s）→ 09:53:31Z HERMES 判定适合后分发 → 09:53:57Z OpenCode 自己贴证据（正文以【OpenCode】开头，未代贴，opencode 退出码 0、耗时 38.3s）→ HERMES 独立复算 wc -c=21、od -c 为 opencode-dispatch-ok\\n、shasum -a 256=96c55ec9ee1627a95b4dac285a70f01eab4f31a749351481e57491af4da448c4（与 printf 'opencode-dispatch-ok\\n' | shasum -a 256 完全一致）→ 卡 #5 停在 状态:待验收 未自关。自检中还暴露并修掉一个真 bug：board_poll.py --dry-run 原先照样写 board-state.json，会把未认领的卡记成 claimed=true（labels_hash 未变 → 真轮询永久跳过该卡），已改为 dry-run 不写 state 并实测复验。未动 接单:HERMES 现有取活路径、未改 config.yaml、未用 --global、未给 OpenCode 装 TG/MCP 插件、未推 tag；分发只用 Zen 免费模型，无费用。"
+}
