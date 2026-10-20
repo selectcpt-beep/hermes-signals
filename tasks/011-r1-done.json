@@ -1,0 +1,25 @@
+{
+  "task_id": "011-r1",
+  "title": "011 补充实施 — duty 上下班开关加 Hermes cron 联动 + 修三处问题",
+  "status": "done",
+  "completed_at": "2026-10-20T20:55:00+08:00",
+  "issue": 11,
+  "evidence": {
+    "folder": "/Users/daiba/switch-design-2026-10-20/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/10",
+      "https://github.com/selectcpt-beep/task-board/issues/11"
+    ],
+    "screenshots": [],
+    "logs": [
+      "/Users/daiba/.hermes/cache/scratch/011-duty-cron-link-evidence.log"
+    ],
+    "files": [
+      "/Users/daiba/.hermes/scripts/duty",
+      "/Users/daiba/switch-design-2026-10-20/使用说明.md",
+      "/Users/daiba/switch-design-2026-10-20/backup/"
+    ]
+  },
+  "blockers": [],
+  "notes": "背景：卡#10 评估（OpenCode 出）+ Grok Bot 核查通过（采纳 HERMES 两处事实修正：Hermes cron 真身是 ~/.hermes/cron/jobs.json 归 gateway 管、webhook 权限实测可用）。卡#11（OpenCode 实施）落地改法 b：RunAtLoad=false + duty 脚本。本轮为 HERMES 补充实施，修三处问题。(1) 备份 plist 无效 XML：backup/ai.hermes.board-keeper.plist 第12行 2>&1 的 & 是裸的，plutil -lint 报 unknown ampersand-escape sequence，说明书的 cp 覆盖 + launchctl bootstrap 回滚路径原本走不通；已转义为 &amp;（纯 XML 转义，语义零变化），校验 RunAtLoad 仍为 true、KeepAlive=true、plutil OK、命令串与现文件逐字节一致，回滚可正常走通。(2) 使用说明.md 第11行笔误「不让他 Schiff 合上眼」已改为「不让他电脑合上眼」。(3) 关键缺口：duty 只管两个 launchd job，管不到归 gateway 管的两个看板 cron，「下班」后它们仍每2/5分钟转且 da76a76e4eda 是 agent 模式会烧模型；已在 duty 加 cron 联动，核心设计是只恢复 duty 自己停过的（记录于 ~/.hermes/duty.cron-touched），原本就被 batian 手动暂停的一律不碰并如实汇报。行为测试（真改 cron 状态后已还原）：7f43c3b21a1a 置 enabled 模拟本来在跑，duty off 暂停并记入 touched、da76a76e4eda 保持 disabled 未被误动；duty on 恢复前者、后者仍 disabled、touched 清空。端到端 off→status→on→status 通过：off 后 keeper/caffeinate 未加载、gateway 保留 pid 699；on 后 keeper pid 44328、caffeinate pid 44331，ps 实锤 PPID=1。还原确认两 cron 均 enabled=False state=paused、touched 0 字节。开发坑记录：bash 在 UTF-8 locale 下把全角括号当合法标识符字符，$nm（ 被解析为变量 nm（ 致 set -u 报 unbound variable，已统一改半角 | 分隔 + ${nm} 界定并注释说明。改动仅限 4 个文件（duty 脚本、备份 plist×1、使用说明.md、留底 bak×2）；未动 gateway plist（mtime 10-16 14:40:47）、config.yaml（mtime 15:33:41）、其余 7 个 cron 及 WL-DC 作业。证据 011-duty-cron-link-evidence.log 72 行。卡#10 状态：Grok Bot 已核查通过，关闭留待 Muse。当前 duty 处于上班中，待 batian 决定何时执行 duty off。"
+}
