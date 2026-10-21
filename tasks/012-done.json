@@ -1,0 +1,25 @@
+{
+  "task_id": "012",
+  "title": "OmniRoute 免费模型路由器只读评估（不安装、不改配置）",
+  "status": "done",
+  "completed_at": "2026-10-21T19:12:00+08:00",
+  "issue": 12,
+  "evidence": {
+    "folder": "/Users/daiba/omniroute-eval-2026-10-21/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/12",
+      "https://github.com/selectcpt-beep/task-board/issues/12#issuecomment-6314506066",
+      "https://github.com/diegosouzapw/OmniRoute",
+      "https://www.v2ex.com/t/1250460"
+    ],
+    "screenshots": [],
+    "logs": [
+      "/Users/daiba/omniroute-eval-2026-10-21/OmniRoute评估.md"
+    ],
+    "files": [
+      "/Users/daiba/omniroute-eval-2026-10-21/OmniRoute评估.md"
+    ]
+  },
+  "blockers": [],
+  "notes": "纯只读评估：未 clone、未 npm/pip/docker 安装、未启动服务、未注册、未绑卡、未改任何配置（config.yaml mtime Oct 21 17:14:21、opencode.json mtime Oct 20 14:20:34，均早于本卡执行；npm -g 与 docker images 无 omni 命中；工作目录内仅报告文件）。报告 218 行 / 14808 字节 / sha256 f7af3877e6d31e37f23c9abf2e973c75bf92bbbe3da3b2300b1a6d218f4a3936。结论：暂不接入。理由——(1) 现有 opencode/glm-5.3-flash-free 链路已零成本且实测稳定（卡#13）；(2) OmniRoute 本身不发额度，只聚合各家自注册免费池（README 原文：not a token grant from OmniRoute）；(3) 对 OpenCode 免费层无效，第三方转调会撞 403 FreeTierError（FREE_TIERS.md 把 opencode-zen 标 caution）；(4) 安全面：GHSA-hf57-cqmx-p4gr critical RCE（<3.8.49，最新 v3.8.52 已修）+ 全量 provider key 集中在第三方应用；(5) 真实成本是管理成本。需 batian 拍板 5 项（是否接付费 provider / 是否碰 opencode-zen 池 / 是否长期跑 Docker / 是否允许改 ~/.config/opencode/opencode.json / 是否做不安装的进一步验证）。本轮复核：stars 79153、forks 11518、MIT、open_issues 463(issue+PR)、最新 release v3.8.52(2026-10-19)、advisory 仍在列——与报告一致。卡#12 证据全文已贴卡（评论 6314506066，11972 字符），标签维持「状态:待验收」。另：卡#15（部署前勘察）仍为「状态:阻塞」，阻塞项未解：①121.40.226.114 的登录方式（SSH 用户名+公钥 或 宝塔地址/账号）②DuckDNS 完整域名——需 batian 提供，非执行方可解。"
+}
