@@ -1,0 +1,27 @@
+{
+  "task_id": "018",
+  "title": "【看板可见性】进度页顶部「今天谁在干什么」表",
+  "status": "done",
+  "completed_at": "2026-10-21T21:58:00+08:00",
+  "issue": 18,
+  "evidence": {
+    "folder": "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/18",
+      "https://github.com/selectcpt-beep/task-board/issues/18#issuecomment-6317594185",
+      "https://github.com/selectcpt-beep/task-board/issues/18#issuecomment-6317664327"
+    ],
+    "screenshots": [
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/验收截图/看板表-390-复核.png",
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/验收截图/看板表-390.png",
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/验收截图/看板表-1280.png"
+    ],
+    "logs": [],
+    "files": [
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/进度.html",
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/status.json"
+    ]
+  },
+  "blockers": [],
+  "notes": "执行方=OpenCode（看守分发 opencode run --auto --model opencode/glm-5.3-flash-free，rc=0，证据评论 issuecomment-6317594185 由 OpenCode 自贴）。HERMES 独立复核（本机 http.server 8899 + 无头 Chrome）：表在 main 顶部（index 小于 section.now）；六列齐全；数据真来自 status.json（today-meta 显示其 source/updated）；7 行全渲染；360/390/1280 三档 scrollWidth<=innerWidth（390: 390=390，表右边界 372；1280: 1265）；<=700px 卡片式堆叠（td::before 带列名）。HERMES 代更新状态列：#18 在做→待验收、#17 已接→待验收（按卡内「以看板为准」），仅改 status.json 与页内兜底数据的 status/evidence/url 两行。sha256 status.json=fb81652348d5aa19f38212ec1bc8163b3d45d4ac5986b57a743f867874b25163；进度.html=0900b096737024698989a6579be25e76950121f334225968bd4b5ee8fd577fc7；复核截图 8c92b73513360d5e1540174eb5efb86548b912db637c937c670d5421fcdc35c0。未接 GitHub API 自动同步、未改 board_dispatch、未部署公网。"
+}

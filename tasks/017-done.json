@@ -1,0 +1,28 @@
+{
+  "task_id": "017",
+  "title": "【看板可见性】分发失败不得假「进行中」（含纠正 #16）",
+  "status": "done",
+  "completed_at": "2026-10-21T21:58:00+08:00",
+  "issue": 17,
+  "evidence": {
+    "folder": "/Users/daiba/.hermes/scripts/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/17",
+      "https://github.com/selectcpt-beep/task-board/issues/17#issuecomment-6317642240",
+      "https://github.com/selectcpt-beep/task-board/issues/16#issuecomment-6317635245",
+      "https://github.com/selectcpt-beep/task-board/issues/19"
+    ],
+    "screenshots": [],
+    "logs": [
+      "/Users/daiba/.hermes/logs/board-dispatch/20261021-214259-issue19.log",
+      "/Users/daiba/.hermes/logs/board-dispatch/20261021-214318-issue19.log",
+      "/Users/daiba/.hermes/logs/board-keeper.log"
+    ],
+    "files": [
+      "/Users/daiba/.hermes/scripts/board_dispatch.py",
+      "/Users/daiba/.hermes/scripts/board_keeper.py"
+    ]
+  },
+  "blockers": [],
+  "notes": "改动：(1) board_dispatch.py 新增 --fail-state auto|revert|block|none（默认 auto）+ --attempt/--max-attempts；失败时 apply_failure_state() 先摘「状态:进行中」再二选一：退回「状态:待取」并记录第几次尝试，或用满次数/超时则打「状态:阻塞」+ 评论原因；迁移后自复核标签，末行 JSON 带 fail_state。(2) board_keeper.py dispatch() 透传尝试次数与 --fail-state auto；失败分支改为 assert_not_fake_progress() 独立复核（仍挂进行中→就地摘掉退回待取+评论）；熔断分支补 remove 进行中；分发抛异常也按失败处理。硬证据：py_compile exit 0；演练卡 #19（bogus 模型使其 rc=1）attempt1/2 标签 进行中→待取、attempt2/2 进行中→阻塞，两轮均确认「进行中」已摘，卡上留 <!-- fail-state:... --> 标记，演练后 #19 已 CLOSED。#16 核对：labels=状态:待验收 → 已对齐无需改标。sha256 board_dispatch.py=a944013767d7f8f4cf3fbadf228cb491bcfeb07db64fe0d5aabb9d7ec695aff8；board_keeper.py=3a65c8e8e801ef2d53659f3aaee9b2ed8f7424a1c099e501344e92b6817935df。"
+}
