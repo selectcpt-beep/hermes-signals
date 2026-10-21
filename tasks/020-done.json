@@ -1,0 +1,25 @@
+{
+  "task_id": "020",
+  "title": "【项目:主页】正式部署到阿里云（xiaomai.duckdns.org）",
+  "status": "done",
+  "completed_at": "2026-10-21T22:36:00+08:00",
+  "issue": 20,
+  "evidence": {
+    "folder": "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/20",
+      "https://xiaomai.duckdns.org/"
+    ],
+    "screenshots": [
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/验收截图/xiaomai-live.png"
+    ],
+    "logs": [],
+    "files": [
+      "/var/www/homepage (server, 9 files / 56K)",
+      "/etc/caddy/Caddyfile (+5 lines, backup Caddyfile.bak.20261021222736)",
+      "11-部署包裹/dist-20261021-2218.tgz"
+    ]
+  },
+  "blockers": [],
+  "notes": "部署完成：服务器 /var/www/homepage 9 文件 56K，Caddy 追加 5 行（validate=Valid, reload rc=0, is-active=active），Let's Encrypt 证书 CN=xiaomai.duckdns.org 有效至 2027-01-19。HERMES 独立复核（2026-10-21 23:0x CST）：r.jina.ai 抓 https://xiaomai.duckdns.org/ = 200 且 title 为「小麦｜用大白话指挥 AI，做出能用的小工具」；直连 80 端口返回 Server: Beaver + <title>Non-compliance ICP Filing</title>（403），确认大陆侧被阿里云未备案拦截，与卡内发现一致；验收截图 xiaomai-live.png 存在（233351 B，22:35）。公开未决项（待 Muse/用户拍板）：duckdns 域名无法备案，大陆直连需代理，三条走法 A 保持现状 / B 换可备案域名 / C 移境外机均未执行。登录通道用阿里云命令助手加一次性部署公钥，卡内不含密钥。旧站 batian-test 三段配置 diff 未变动。此 done 信号取代 020-blocked.json。"
+}
