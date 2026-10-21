@@ -1,0 +1,26 @@
+{
+  "task_id": "020",
+  "title": "【项目:主页】正式部署到阿里云（xiaomai.duckdns.org）",
+  "status": "blocked",
+  "completed_at": "2026-10-21T22:20:09+08:00",
+  "issue": 20,
+  "evidence": {
+    "folder": "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/20"
+    ],
+    "screenshots": [],
+    "logs": [],
+    "files": [
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/11-部署包裹/dist-20261021-2218.tgz",
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/09-部署前勘察.md",
+      "/Users/daiba/.ssh/id_xiaomai_deploy.pub"
+    ]
+  },
+  "blockers": [
+    "121.40.226.114 无任何登录通道：本机 11 把私钥 × root/admin/ecs-user/ubuntu 全部 Permission denied (publickey)；服务端不开 password/keyboard-interactive；8888 是 nginx 404 不是宝塔面板；阿里云控制台在本机 Chrome 无登录态",
+    "解法 A（推荐）：把部署公钥加入服务器 ~/.ssh/authorized_keys —— ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIK+dn1FMPu8MMHYqXgGWijYeDKkbqALozhIxrhHYf5d xiaomai-homepage-deploy-20261021 （指纹 SHA256:4452ncSRn2cLHmEN+TMZMwzZejOykvkwt7k3EJCKNe4，私钥在本机 ~/.ssh/id_xiaomai_deploy，不外发）",
+    "解法 B：提供宝塔面板真实入口（地址+端口+安全入口路径），账号口令私发、不写进卡"
+  ],
+  "notes": "DNS 已生效（dig xiaomai.duckdns.org → 121.40.226.114）；HTTPS 仍 Connection reset by peer（Caddy 不认识该 SNI，说明域名还没写进 Caddy，符合未部署预期）。本卡只做到「产物就绪 + 只读确认」：本机 node site/build.mjs 重生成 dist（8 页 9 文件，index.html sha256 f3695160fb2805e9a5e7528ef420dea446e0570fd9506851ae3ee2d6d644e914，style.css sha256 deee8b4edd12bc411b8dcd8e1dacf63b5042f0e1909d453d6680096039f03b642），已打包 11-部署包裹/dist-20261021-2218.tgz（sha256 e33897f8d01cedaa7c3385f8876dfdcd02ea7e8ee9e2dc907726e5da9ce00bdb）。未上传、未改 Caddy、未 reload、未碰任何旧站。拿到登录后剩余动作约 10 分钟：scp dist → /var/www/homepage → Caddy 只追加 xiaomai.duckdns.org 一段（先备份+diff 确认 batian-test//sheihejiu//zbj-trigger 三段未变）→ caddy validate → reload → curl/截图验收。"
+}
