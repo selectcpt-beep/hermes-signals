@@ -1,0 +1,31 @@
+{
+  "task_id": "016",
+  "title": "【项目:主页】v0 小改：去 vibe SaaS + UI 高优先级（对照验收意见）",
+  "status": "done",
+  "completed_at": "2026-10-21T21:10:00+08:00",
+  "issue": 16,
+  "evidence": {
+    "folder": "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/",
+    "links": [
+      "https://github.com/selectcpt-beep/task-board/issues/16",
+      "https://github.com/selectcpt-beep/task-board/issues/16#issuecomment-6316620661",
+      "https://github.com/selectcpt-beep/task-board/issues/16#issuecomment-6316825243"
+    ],
+    "screenshots": [
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/验收截图/首页-1280-小改后.png",
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/验收截图/首页-390-小改后.png",
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/验收截图/板块页-390-小改后.png"
+    ],
+    "logs": [
+      "/Users/daiba/.hermes/logs/board-dispatch/20261021-204739-issue16.log"
+    ],
+    "files": [
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/site/content.js",
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/site/src/style.css",
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/site/dist/index.html",
+      "/Users/daiba/多模态测试/小麦工作室/03-项目/主页/进度.html"
+    ]
+  },
+  "blockers": [],
+  "notes": "执行方=OpenCode（opencode run --auto --model opencode/glm-5.3-flash-free），HERMES 独立复核后翻标签。硬证据：grep -RniE 'vibe|saas' site/content.js site/dist 退出码 1 零命中（加严全站 site/ 亦零命中）；content.js studio=多板块个人工作室、topSub=个人工作室、h1/title=小麦｜用大白话指挥 AI，做出能用的小工具；dist/index.html mtime 20:55:28 晚于 content.js 20:53:00 与 style.css 20:55:23；dist/index.html sha256=f3695160fb2805e9a5e7528ef420dea446e0570fd9506851ae3ee2d6d644e914。HERMES 自跑 Playwright 实测（本机 http.server + chrome）：390 宽 6 个 .wrap margin-left 全 20px、无横向溢出（scrollWidth=innerWidth=390）、H1 2 行、.badge 全站仅 1 种样式（999px|1px|4px 12px|rgb(239,233,220)）、顶栏文案 390 与 1280 一致（麦 / 小麦 / 个人工作室 / 七个板块）、点「七个板块」#sections top=0（390/1280 均精确）、空态含明确下一步、页脚 © 2026；innerText 无 vibe/saas。截图 3 张存在非空。标签已翻「状态:待验收」。两个待 batian 知悉项：(1) 本卡 20:47:38/39 被并发分发两次（board_keeper + 外部 agent 会话），HERMES 杀掉重复进程后保留一路完成，卡上「退出码 -15」评论是杀重复进程的产物而非任务失败；(2) 工作目录多出 _sync-to-box.tgz（20:54:01，569KB，含 site/），卡内未要求，未上传未部署，未删除。"
+}
